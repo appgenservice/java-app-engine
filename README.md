@@ -1,0 +1,1 @@
+App engine application which copy java project files from other app and generate springboot jar, dockerize it and deploy it
