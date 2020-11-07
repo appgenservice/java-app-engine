@@ -27,7 +27,7 @@ echo "App package created"
 docker build -t ${DOCKER_IMAGE} .
 docker rm -f ${APP_NAME}
 #If docker running on same machine, add link to communicate between app and mysql
-docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${APP_NAME} --link mysql  -d ${DOCKER_IMAGE}
+docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${APP_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} --link mysql  -d ${DOCKER_IMAGE}
 
 sleep 10
 echo "Open API UI :  http://appgenservice.com:${PORT}/swagger-ui-custom.html"
