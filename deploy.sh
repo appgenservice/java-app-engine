@@ -30,4 +30,4 @@ docker rm -f ${APP_NAME}
 docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${APP_NAME} --link mysql  -d ${DOCKER_IMAGE}
 
 sleep 10
-echo "Open API UI :  http://localhost:${PORT}/swagger-ui-custom.html"
+echo "Open API UI :  http://appgenservice.com:${PORT}/swagger-ui-custom.html"
