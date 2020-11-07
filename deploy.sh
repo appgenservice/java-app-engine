@@ -1,28 +1,33 @@
 #!/bin/bash
-
+#./deploy.sh ${APP_GIT_REPO_URL} ${GIT_BRANCH} ${APP_ID} ${APP_NAME}
 GIT_REPO=$1
-APP_ID=$2
-PORT_BASE=8080
+GIT_BRANCH=$2
+APP_ID=$3
+APP_NAME=$4_${APP_ID}
+PORT_BASE=9000
 PORT=$(( $PORT_BASE + $APP_ID ))
+APP_TMP_DIR=/tmp/${APP_NAME}
+DOCKER_IMAGE=appgenservice/${APP_NAME}
 
-echo "Will be cloning ${GIT_REPO} to ${APP_ID}"
-rm -rf /tmp/${APP_ID}
-echo "Removed /tmp/${APP_ID}"
-echo git clone --single-branch --branch app-${APP_ID} ${GIT_REPO} /tmp/${APP_ID}
-git clone --single-branch --branch app-${APP_ID} ${GIT_REPO} /tmp/${APP_ID}
+echo "Will be cloning ${GIT_REPO} to ${APP_TMP_DIR}"
 
-echo "Clone  ${GIT_REPO} to /tmp/${APP_ID}"
+rm -rf ${APP_TMP_DIR}
+echo "Removed ${APP_TMP_DIR}"
+echo git clone --single-branch --branch ${GIT_BRANCH} ${GIT_REPO} ${APP_TMP_DIR}
+git clone --single-branch --branch ${GIT_BRANCH} ${GIT_REPO} ${APP_TMP_DIR}
+
+echo "Clone  ${GIT_REPO} to ${APP_TMP_DIR}"
 rm -rf ./src/main/java/*
-cp -R /tmp/${APP_ID}/src/main/java/* ./src/main/java/
-echo "Copied /tmp/${APP_ID} to java-app-engine"
+cp -R ${APP_TMP_DIR}/src/main/java/* ./src/main/java/
+echo "Copied ${APP_TMP_DIR} to java-app-engine"
 
 mvn clean package
 echo "App package created"
 
-docker build -t cheenath/java-app-${APP_ID} .
-docker rm -f java-app-${APP_ID}
+docker build -t ${DOCKER_IMAGE} .
+docker rm -f ${APP_NAME}
 #If docker running on same machine, add link to communicate between app and mysql
-docker run -p ${PORT}:8080 --name=java-app-${APP_ID} -e DB_NAME=app${APP_ID} --link mysql  -d cheenath/java-app-${APP_ID}
+docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${APP_NAME} --link mysql  -d ${DOCKER_IMAGE}
 
 sleep 10
 echo "Open API UI :  http://localhost:${PORT}/swagger-ui-custom.html"
