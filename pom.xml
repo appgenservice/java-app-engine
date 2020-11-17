@@ -8,11 +8,11 @@
 		<version>2.3.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ags</groupId>
-	<artifactId>cp_management</artifactId>
+	<groupId>com.cheenath</groupId>
+	<artifactId>java-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cp_management</name>
-	<description>CP Management App</description>
+	<name>java-app-engine</name>
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -23,19 +23,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.5.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,6 +45,23 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.2.32</version>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.cheenath.infra</groupId>-->
+<!--			<artifactId>java-rest-base</artifactId>-->
+<!--			<version>0.0.1-SNAPSHOT</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/java-rest-base-0.0.1-SNAPSHOT-client.jar</systemPath>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
@@ -57,9 +71,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<includeSystemScope>true</includeSystemScope>
-					<mainClass>com.cpm.RestServiceApplication</mainClass>
+					<mainClass>com.cheenath.RestServiceApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
