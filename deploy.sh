@@ -1,12 +1,12 @@
 #!/bin/bash
-#./deploy.sh https://github.com/appgenservice/java-spring-starter.git main 1 user management dbname_1 dbuser_1 dbpassword_1
+1 https://github.com/appgenservice/appmanager.git 2) main 3) 1 4)app_management 5)dbname_1 6)dbuser_1 7)dbpassword_1
 GIT_REPO=$1
 GIT_BRANCH=$2
 APP_ID=$3
-APP_NAME=$5
-DB_NAME=$6
-DB_USER=$7
-DB_PASSWORD=$8
+APP_NAME=$4
+DB_NAME=$5
+DB_USER=$6
+DB_PASSWORD=$7
 PORT_BASE=9000
 PORT=$(( $PORT_BASE + $APP_ID ))
 APP_TMP_DIR=/tmp/${APP_NAME}
