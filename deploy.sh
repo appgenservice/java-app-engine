@@ -25,7 +25,9 @@ echo "Copied ${APP_TMP_DIR} to java-app-engine"
 mvn clean package
 echo "App package created"
 
+echo docker build -t ${DOCKER_IMAGE} .
 docker build -t ${DOCKER_IMAGE} .
+echo docker rm -f ${APP_NAME}
 docker rm -f ${APP_NAME}
 #If docker running on same machine, add link to communicate between app and mysql
 docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} --link mysql  -d ${DOCKER_IMAGE}
