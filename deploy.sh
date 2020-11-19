@@ -1,5 +1,4 @@
 #!/bin/bash
-1 https://github.com/appgenservice/appmanager.git 2) main 3) 1 4)app_management 5)dbname_1 6)dbuser_1 7)dbpassword_1
 GIT_REPO=$1
 GIT_BRANCH=$2
 APP_ID=$3
