@@ -20,7 +20,8 @@ git clone --single-branch --branch ${GIT_BRANCH} ${GIT_REPO} ${APP_TMP_DIR}
 echo "Clone  ${GIT_REPO} to ${APP_TMP_DIR}"
 rm -rf ./src/main/java/*
 cp -R ${APP_TMP_DIR}/src/main/* ./src/main/
-cp -R ${APP_TMP_DIR}/pom.xml ./
+cp ${APP_TMP_DIR}/pom.xml ./pom.xml
+cat pom.xml
 echo "Copied ${APP_TMP_DIR} to java-app-engine"
 
 mvn clean package
