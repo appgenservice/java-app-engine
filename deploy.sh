@@ -10,6 +10,8 @@ PORT=$8
 APP_TMP_DIR=/tmp/${APP_NAME}
 DOCKER_IMAGE=appgenservice/${APP_NAME}
 
+MYSQL_LINK=mysql
+
 echo "Will be cloning ${GIT_REPO} to ${APP_TMP_DIR}"
 
 rm -rf ${APP_TMP_DIR}
@@ -33,7 +35,7 @@ echo docker rm -f ${APP_NAME}
 docker rm -f ${APP_NAME}
 #If docker running on same machine, add link to communicate between app and mysql
 echo docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} --link mysql  -d ${DOCKER_IMAGE}
-docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} --link mysql  -d ${DOCKER_IMAGE}
+docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} -e MYSQL_HOST=${MYSQL_LINK} --link ${MYSQL_LINK}  -d ${DOCKER_IMAGE}
 
 sleep 10
 echo "Open API UI :  http://appgenservice.com:${PORT}/swagger-ui-custom.html"
