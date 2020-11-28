@@ -17,11 +17,12 @@ echo "Removed ${APP_TMP_DIR}"
 echo git clone --single-branch --branch ${GIT_BRANCH} ${GIT_REPO} ${APP_TMP_DIR}
 git clone --single-branch --branch ${GIT_BRANCH} ${GIT_REPO} ${APP_TMP_DIR}
 
-echo "Clone  ${GIT_REPO} to ${APP_TMP_DIR}"
-rm -rf ./src/main/*
-cp -R ${APP_TMP_DIR}/src/main/* ./src/main/
-cp ${APP_TMP_DIR}/pom.xml ./pom.xml
-echo "Copied ${APP_TMP_DIR} to java-app-engine"
+cd ${APP_TMP_DIR}
+#echo "Clone  ${GIT_REPO} to ${APP_TMP_DIR}"
+#rm -rf ./src/main/*
+#cp -R ${APP_TMP_DIR}/src/main/* ./src/main/
+#cp ${APP_TMP_DIR}/pom.xml ./pom.xml
+#echo "Copied ${APP_TMP_DIR} to java-app-engine"
 
 mvn clean package
 echo "App package created"
@@ -31,7 +32,12 @@ docker build -t ${DOCKER_IMAGE} .
 echo docker rm -f ${APP_NAME}
 docker rm -f ${APP_NAME}
 #If docker running on same machine, add link to communicate between app and mysql
+echo docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} --link mysql  -d ${DOCKER_IMAGE}
 docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} --link mysql  -d ${DOCKER_IMAGE}
 
 sleep 10
 echo "Open API UI :  http://appgenservice.com:${PORT}/swagger-ui-custom.html"
+
+rm -rf ${APP_TMP_DIR}
+echo "All set. Removed ${APP_TMP_DIR}"
+
