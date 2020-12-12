@@ -38,7 +38,7 @@ echo docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_U
 docker run -p ${PORT}:8080 --name=${APP_NAME} -e DB_NAME=${DB_NAME} -e DB_USER=${DB_USER} -e DB_PASSWORD=${DB_PASSWORD} -e MYSQL_HOST=${MYSQL_LINK} --link ${MYSQL_LINK}  -d ${DOCKER_IMAGE}
 
 sleep 10
-echo "Open API UI :  http://appgenservice.com:${PORT}/swagger-ui-custom.html"
+echo "Open API UI :  http://myvotes.in:${PORT}/swagger-ui-custom.html"
 
 rm -rf ${APP_TMP_DIR}
 echo "All set. Removed ${APP_TMP_DIR}"
